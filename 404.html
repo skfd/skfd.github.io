@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Page not found</title>
+<script>
+// GitHub Pages serves this file for every skfd.github.io path that has no site behind it.
+// Repos that moved to an organisation lost their skfd.github.io/<repo>/ address, and Pages
+// cannot redirect, so this sends the browser to the same path on the organisation's host.
+// Add a repo here only once it has moved and its new site is up.
+var MOVED = {
+  "guelph-maps": [
+    "guelph-address-layer", "guelph-bike-layer", "guelph-bike-parking",
+    "guelph-buildings-layer", "guelph-bus-stops-layer", "guelph-gardens-layer",
+    "guelph-hydrants-layer", "guelph-parks-layer", "guelph-sidewalks-layer",
+    "guelph-transit-animation", "guelph-trees-layer", "guelph-water-layer"
+  ],
+  "toronto-maps": []
+};
+var repo = location.pathname.split("/")[1] || "";
+var target = null;
+for (var org in MOVED) {
+  if (MOVED[org].indexOf(repo.toLowerCase()) !== -1) {
+    target = "https://" + org + ".github.io" + location.pathname + location.search + location.hash;
+  }
+}
+if (target) location.replace(target);
+</script>
+<style>
+  body { font: 16px/1.5 system-ui, sans-serif; max-width: 34em; margin: 4em auto; padding: 0 1em; }
+</style>
+</head>
+<body>
+<h1>Page not found</h1>
+<p id="msg">There is nothing at this address.</p>
+<script>
+if (target) {
+  document.getElementById("msg").innerHTML =
+    'This page has moved to <a id="to"></a>.';
+  var a = document.getElementById("to");
+  a.href = target;
+  a.textContent = target;
+}
+</script>
+</body>
+</html>
